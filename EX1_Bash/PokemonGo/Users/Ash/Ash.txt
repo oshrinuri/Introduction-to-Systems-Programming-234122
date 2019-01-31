@@ -1,0 +1,3 @@
+Charizard:40,75,30
+Bulbasaur:8,20,60
+Diglett:9,45,12

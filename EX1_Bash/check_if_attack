@@ -1,0 +1,20 @@
+#!/bin/bash
+
+function attackingTypes {   
+    
+    cd "Users/$1"
+    num_of_pokemons=`cat "$1".txt | wc -l`
+
+    for (( i=1; $i <= $num_of_pokemons; i++ )); do
+        current_pokemon=`cut -d":" -f1 $1.txt | head -n+${i} | tail -n-1`
+        cd "../../Pokemons/${current_pokemon}"
+        types=`grep -w "Type" "$current_pokemon".txt | cut -d":" -f2`
+        cd "../.."
+        if [[ ! -z `find_user_with_pokemons $2 "W" $types` ]]; then
+            echo $1 : $current_pokemon $2 : `find_user_with_pokemons $2 "W" $types | sort -r | head -n+1`
+        fi
+        cd "Users/$1"
+    done
+}
+
+attackingTypes $1 $2 | sort -r -s -k3 | head -n+1

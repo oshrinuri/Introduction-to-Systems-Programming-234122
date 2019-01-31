@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [[ ` check_if_attack $1 $2 ` > 0  ]]; then
+    attacking_poke=` check_if_attack $1 $2 | cut -d" " -f3 `                     
+    cd Users/$1
+    attacking_poke_level=`grep -w $attacking_poke $1.txt | cut -d":" -f2 | cut -d"," -f1 `             
+    attacking_cp=`grep -w $attacking_poke $1.txt | cut -d"," -f3`                     
+    cd "../.."
+    evolved=` check_evolution $attacking_poke $(( $attacking_poke_level + 1 )) `  
+    attacked_poke=`check_if_attack $1 $2 | cut -d":" -f3`                      
+    cd "Users/$2"
+    attacked_hp=`grep -w $attacked_poke $2.txt | cut -d"," -f2`                       
+    attacked_new_hp=$(($attacked_hp - $attacking_cp))
+    if (( $attacked_new_hp < 0 )); then
+        attacked_new_hp=0
+    fi        
+    cd "../.."
+    if [[ $evolved != $attacking_poke ]]; then
+        old_attack=`check_if_attack $1 $2`
+        echo ${old_attack/$attacking_poke/$evolved}
+        echo $evolved : level : $(( $attacking_poke_level + 1 )) 
+        echo $attacked_poke : hp : $attacked_new_hp    
+    else
+        check_if_attack $1 $2
+        echo $attacking_poke : level : $(( $attacking_poke_level + 1 )) 
+        echo $attacked_poke : hp : $attacked_new_hp
+    fi
+fi

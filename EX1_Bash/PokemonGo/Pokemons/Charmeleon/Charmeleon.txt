@@ -1,0 +1,10 @@
+Name:Charmeleon
+Index:5
+Category:Flame
+Abilities:Blaze
+Type:Fire
+Weaknesses:Rock Ground Water
+Evolutions:
+Charmander:1-16
+Charmeleon:17-36
+Charizard:37-

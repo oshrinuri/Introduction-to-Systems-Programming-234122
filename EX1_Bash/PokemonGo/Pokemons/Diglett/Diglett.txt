@@ -1,0 +1,10 @@
+Name:Diglett
+Index:50
+Category:Mole
+Abilities:Sand Veil
+Type:Ground
+Weaknesses:Grass Ice Water
+Evolutions:
+Diglett:1-20
+Dugtrio:21-44
+mega_dugtrio:45-

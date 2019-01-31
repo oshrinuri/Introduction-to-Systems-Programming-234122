@@ -1,0 +1,18 @@
+#!/bin/bash
+
+cd "Pokemons/$1"
+
+for (( i=8 ; $i<11 ; i++)); do
+    
+    minlevel=`head -n+${i} $1.txt | tail -n-1 | cut -d"-" -f1 | cut -d":" -f2`
+    
+    if (( $2 >= $minlevel )); then
+        continue    
+    else     
+        break
+    fi
+    
+done
+
+pokename=`head -n+$(($i-1)) $1.txt | tail -n-1 | cut -d":" -f1`
+echo $pokename

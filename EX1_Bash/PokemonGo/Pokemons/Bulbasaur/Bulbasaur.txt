@@ -1,0 +1,10 @@
+Name:Bulbasaur
+Index:1
+Category:Seed
+Abilities:Overgrow
+Type:Grass Poison
+Weaknesses:Fire Flying Ice Psychic
+Evolutions:
+Bulbasaur:1-12
+Ivysaur:13-32
+Venusaur:33-

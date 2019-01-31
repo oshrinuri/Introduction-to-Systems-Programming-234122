@@ -1,0 +1,26 @@
+#!/bin/bash
+
+function searchPokemon { # $1: Search by Type/Weakness, $2: Searching argument
+    cd "Pokemons"
+    for pokemon in `ls`; do
+        cd $pokemon
+        for arg in ${@:2}; do # iterate over all given types/weaknesses
+            local res=`grep "^"${1}":" ${pokemon}.txt | grep -w $arg`
+            if [[ ! -z "$res" ]]; then
+                echo `grep "^Index:" ${pokemon}.txt | cut -d":" -f2-` $pokemon
+            fi
+        done
+        cd ..
+    done | sort -rn | uniq
+    cd ..
+}
+
+function handleTypeOrWeakness {
+	if [[ $1 == "T" ]]; then  ## Type
+	    searchPokemon "Type" ${@:2}
+	elif [[ $1 == "W" ]]; then ## Weakness
+        searchPokemon "Weaknesses" ${@:2} 
+    fi
+}
+
+handleTypeOrWeakness $*

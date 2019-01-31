@@ -1,0 +1,13 @@
+#!/bin/bash
+
+function pokemonsOfTrainer {
+    cd "Users"
+    if [[ ! `ls | grep "$1"` ]]; then
+        exit 1 # Terminates script if no such trainer exists
+    fi
+    cd $1; echo `cat ${1}.txt | cut -d":" -f1`
+    cd "../.."
+}
+for pokemon in `pokemonsOfTrainer $1`; do
+   find_pokemons ${@:2} | cut -d" " -f2 | grep $pokemon
+done | sort
